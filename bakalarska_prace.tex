@@ -1,0 +1,196 @@
+% *****************************************************************************
+%
+%        Bakalářská práce -- Fakulta aplikovaných věd ZČU v Plzni
+%        Šablona: FASThesis (fasthesis.cls)
+%        Kódování: UTF-8
+%
+% *****************************************************************************
+
+% Přepínače třídy fasthesis:
+%   czech      - český jazyk práce, loga a automatické texty v češtině
+%   bc         - bakalářská kvalifikační práce
+%   kky        - Katedra kybernetiky
+%   he         - rod autora (on)
+%   iso690alph - citace dle ČSN ISO 690 ve tvaru [Autor20] (příp. iso690numb pro [1])
+%   pdf        - barevná verze s grafikou na titulní straně (pro odevzdání v PDF)
+%   viewonly   - volitelně odkomentujte, pokud nechcete prázdné sudé stránky pro oboustranný tisk
+\documentclass[czech, bc, kky, he, iso690alph, pdf]{fasthesis}
+
+% _____________________________________________________________________________
+%
+%        ÚVODNÍ ÚDAJE O PRÁCI (FRONT MATTER)
+% _____________________________________________________________________________
+
+\title{Nástroje pro analýzu histologických snímků jaterních scaffoldů v~prostředí QuPath}
+
+% Povinné 4 argumenty: {Křestní jméno}{Příjmení}{Tituly před jménem}{Tituly za jménem}
+\author{Tomáš}{Hrabák}{}{}
+
+\supervisor{Ing. Miroslav Jiřík, Ph.D.}
+
+% Unikátní identifikační číslo práce ze systému STAG (doplňte podle portálu STAG)
+\stagworkid{00000}
+
+% Název PDF souboru se zadáním exportovaným ze STAGu (uloženého ve stejném adresáři)
+% Pozn.: Dokud nemáte finální zadání, můžete sem dočasně vložit podklad nebo řádek zakomentovat.
+\assignment{zadani.pdf}
+
+% Datum a místo odevzdání práce: {den}{měsíc}{rok}{místo}
+\signdate{15}{05}{2027}{V~Plzni}
+
+% Bibliografická databáze ve stejném adresáři
+\addbibresource{literatura.bib}
+
+% Volitelné doplnění prohlášení o využití nástrojů generativní AI (max. 2–3 věty):
+% \auxdeclaration{Během přípravy této práce autor použil nástroj <název nástroje> ke kontrole gramatiky a stylistickým úpravám textu. Po použití tohoto nástroje autor pečlivě zkontroloval a upravil obsah podle potřeby a přebírá plnou odpovědnost za výsledný obsah práce.}
+
+% _____________________________________________________________________________
+%
+%        ABSTRAKT, KLÍČOVÁ SLOVA A PODĚKOVÁNÍ
+% _____________________________________________________________________________
+
+% Příkaz \abstract má DVA povinné parametry: {český abstrakt}{anglický abstrakt}
+% Doporučený rozsah je 100–300 slov (max. polovina strany A4).
+\abstract{%
+Tato bakalářská práce se zabývá návrhem a implementací nástrojů pro analýzu celých histologických snímků decelularizovaných jaterních scaffoldů barvených hematoxylinem a eosinem (H\&E) v~open-source prostředí QuPath. Práce shrnuje problematiku tkáňového inženýrství jater, metod segmentace histologických obrazů a analyzuje stávající pythonovský nástroj ScaffAn. Na základě této analýzy je navrženo a implementováno rozšíření pro QuPath zahrnující lokalizaci vzorku ve snímku, segmentaci jaterního parenchymu a detekci jaterních lalůčků prasete domácího. Funkčnost vytvořeného řešení je vyhodnocena a porovnána s~původní implementací nástroje ScaffAn.
+}{%
+This bachelor's thesis focuses on the design and implementation of tools for analyzing whole-slide histological images of decellularized liver scaffolds stained with hematoxylin and eosin (H\&E) in the open-source QuPath environment. The thesis summarizes the fundamentals of liver tissue engineering and histological image segmentation methods, and analyzes the existing Python-based tool ScaffAn. Based on this analysis, a QuPath extension is designed and implemented to perform tissue sample localization, liver parenchyma segmentation, and hepatic lobule detection in domestic pig samples. The functionality of the developed solution is evaluated and compared against the original ScaffAn implementation.
+}
+
+\keywords{digitální patologie, histologie, jaterní scaffold, segmentace obrazu, QuPath, ScaffAn}
+
+\acknowledgement{%
+Na tomto místě bych rád poděkoval vedoucímu své bakalářské práce, Ing.~Miroslavu Jiříkovi, Ph.D., za odborné vedení, cenné rady a konzultace při vypracování této práce.
+}
+
+% _____________________________________________________________________________
+%
+%        ZAČÁTEK DOKUMENTU
+% _____________________________________________________________________________
+
+\begin{document}
+
+% Vygeneruje titulní stranu, vloží zadání, prohlášení, abstrakty a poděkování
+\frontpages[tm]
+
+% Obsah (případně odkomentujte seznamy obrázků a tabulek)
+\tableofcontents
+% \listoffigures
+% \listoftables
+
+% _____________________________________________________________________________
+%
+%        1. KAPITOLA: ÚVOD
+% _____________________________________________________________________________
+\chapter{Úvod}
+
+% Sem pište úvodní kapitolu:
+% - motivace (význam decelularizovaných jaterních scaffoldů v tkáňovém inženýrství),
+% - proč je potřeba převést/rozšířit analytické postupy do prostředí QuPath,
+% - cíle bakalářské práce a stručný přehled obsahu jednotlivých kapitol.
+
+Tkáňové inženýrství jater představuje perspektivní přístup k~řešení nedostatku vhodných orgánů k~transplantaci~\cite{Moulisova2020}. Jednou z~klíčových fází přípravy biologických nosičů (scaffoldů) je decelularizace, jejíž kvalitu je nutné objektivně hodnotit pomocí histologických snímků.
+
+% _____________________________________________________________________________
+%
+%        2. KAPITOLA: TEORETICKÁ VÝCHODISKA A STAV POZNÁNÍ
+% _____________________________________________________________________________
+\chapter{Teoretická východiska a stav poznání}
+
+\section{Tkáňové inženýrství jater a decelularizované scaffoldy}
+% Popis anatomie jaterního lalůčku prasete domácího (intralobulární a extralobulární tkáň),
+% princip decelularizace a kritéria hodnocení kvality výsledného scaffoldu.
+
+\section{Histologické barvení H\&E a celé histologické snímky}
+% Princip barvení hematoxylinem a eosinem (H&E), digitalizace preparátů
+% a specifika práce s celými histologickými snímky (Whole Slide Images -- WSI).
+
+\section{Metody segmentace histologických snímků}
+% Přehled metod zpracování obrazu pro:
+% 1. lokalizaci vzorku tkáně na podložním sklíčku,
+% 2. segmentaci jaterního parenchymu (intralobulární vs. extralobulární složky) [Jirik2020],
+% 3. detekci jaterních lalůčků, texturní příznaky [Haralick1973] a morfologické metody [MarquezNeila2014].
+
+% _____________________________________________________________________________
+%
+%        3. KAPITOLA: ANALÝZA EXISTUJÍCÍCH NÁSTROJŮ
+% _____________________________________________________________________________
+\chapter{Analýza existujících nástrojů}
+
+\section{Nástroj ScaffAn}
+% Podrobná analýza existujícího nástroje ScaffAn v jazyce Python:
+% - vstupní a výstupní data,
+% - jednotlivé kroky algoritmu při hodnocení kvality decelularizovaných jaterních scaffoldů,
+% - silné stránky a omezení stávajícího řešení.
+
+\section{Prostředí QuPath}
+% Představení open-source platformy QuPath pro digitální patologii [Bankhead2017]:
+% - datový model (projekt, snímek, anotace, detekce, dlaždice/tiles),
+% - možnosti rozšiřování (skriptování v jazyce Groovy, vývoj rozšíření v jazyce Java).
+
+% _____________________________________________________________________________
+%
+%        4. KAPITOLA: NÁVRH A IMPLEMENTACE ROZŠÍŘENÍ PRO QUPATH
+% _____________________________________________________________________________
+\chapter{Návrh a implementace rozšíření pro QuPath}
+
+\section{Architektura navrženého řešení}
+% Celkový návrh rozšíření pro QuPath, napojení na datový model aplikace,
+% návrh uživatelského rozhraní a konfigurace vstupních parametrů.
+
+\section{Implementace analytických nástrojů}
+% Popis konkrétní implementace jednotlivých kroků zpracování:
+% - lokalizace vzorku ve snímku,
+% - segmentace jaterního parenchymu,
+% - detekce jaterních lalůčků a výpočet hodnoticích metrik.
+
+% _____________________________________________________________________________
+%
+%        5. KAPITOLA: EXPERIMENTY, VYHODNOCENÍ A DISKUZE
+% _____________________________________________________________________________
+\chapter{Experimenty, vyhodnocení a diskuze}
+
+\section{Metodika testování a datová sada}
+% Popis testovacích snímků, referenčních výsledků a zvolených metrik hodnocení.
+
+\section{Porovnání výsledků s~nástrojem ScaffAn}
+% Kvantitativní i kvalitativní srovnání výstupů navrženého rozšíření
+% s původní pythonovskou implementací ScaffAn (přesnost, výpočetní náročnost).
+
+\section{Diskuze a možnosti dalšího vývoje}
+% Zhodnocení problematických vlastností navržené metody, hraničních případů
+% a návrhy možných budoucích rozšíření.
+
+% _____________________________________________________________________________
+%
+%        6. KAPITOLA: ZÁVĚR
+% _____________________________________________________________________________
+\chapter{Závěr}
+
+% Celkové shrnutí přínosů práce a zhodnocení splnění všech bodů zadání.
+
+% _____________________________________________________________________________
+%
+%        PŘÍLOHY (VOLITELNÉ)
+% _____________________________________________________________________________
+\appendix
+
+\chapter{Uživatelská příručka k~rozšíření v~prostředí QuPath}
+% Stručný návod k instalaci a spuštění vytvořeného rozšíření v prostředí QuPath.
+
+\chapter{Obsah přiloženého elektronického archivu}
+% Přehled adresářové struktury odevzdaných zdrojových kódů a dokumentace.
+
+% _____________________________________________________________________________
+%
+%        ZÁVĚREČNÉ ČÁSTI (LITERATURA A ZADNÍ STRANA DESEK)
+% _____________________________________________________________________________
+\backmatter
+
+\printbibliography
+
+% Volitelně QR kód s odkazem na práci ve STAGu na zadní straně desek:
+% \setbackpageqrcode
+\backpage
+
+\end{document}
